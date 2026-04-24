@@ -2,10 +2,22 @@
 set -e
 
 REPO="convergint/forge-releases"
-INSTALL_DIR="/usr/local/bin"
 BINARY="forge"
 
+detect_install_dir() {
+    for candidate in /usr/local/bin /opt/homebrew/bin "$HOME/.local/bin"; do
+        case ":$PATH:" in
+            *":$candidate:"*)
+                echo "$candidate"
+                return
+                ;;
+        esac
+    done
+    echo "/usr/local/bin"
+}
+
 main() {
+    INSTALL_DIR=$(detect_install_dir)
     os=$(uname -s | tr '[:upper:]' '[:lower:]')
     arch=$(uname -m)
 
@@ -57,6 +69,15 @@ main() {
 
     tar -xzf "${tmpdir}/${archive}" -C "$tmpdir"
 
+    if [ ! -d "$INSTALL_DIR" ]; then
+        if mkdir -p "$INSTALL_DIR" 2>/dev/null; then
+            :
+        else
+            echo "Creating ${INSTALL_DIR} (requires sudo)..."
+            sudo mkdir -p "$INSTALL_DIR"
+        fi
+    fi
+
     if [ -w "$INSTALL_DIR" ]; then
         mv "${tmpdir}/${BINARY}" "${INSTALL_DIR}/${BINARY}"
     else
@@ -64,9 +85,23 @@ main() {
         sudo mv "${tmpdir}/${BINARY}" "${INSTALL_DIR}/${BINARY}"
     fi
 
-    chmod +x "${INSTALL_DIR}/${BINARY}"
+    if [ -w "${INSTALL_DIR}/${BINARY}" ]; then
+        chmod +x "${INSTALL_DIR}/${BINARY}"
+    else
+        sudo chmod +x "${INSTALL_DIR}/${BINARY}"
+    fi
 
     echo "forge ${version} installed to ${INSTALL_DIR}/${BINARY}"
+
+    case ":${PATH}:" in
+        *":${INSTALL_DIR}:"*) ;;
+        *)
+            echo ""
+            echo "Warning: ${INSTALL_DIR} is not in your PATH."
+            echo "Add it to your shell profile, for example:"
+            echo "  echo 'export PATH=\"${INSTALL_DIR}:\$PATH\"' >> ~/.zshrc && source ~/.zshrc"
+            ;;
+    esac
 }
 
 main
