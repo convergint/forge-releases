@@ -58,10 +58,10 @@ main() {
     curl -sSfL "$url" -o "${tmpdir}/${archive}"
     curl -sSfL "$checksums_url" -o "${tmpdir}/checksums.txt"
 
-    if command -v sha256sum >/dev/null 2>&1; then
-        (cd "$tmpdir" && grep "$archive" checksums.txt | sha256sum --check --quiet)
-    elif command -v shasum >/dev/null 2>&1; then
-        (cd "$tmpdir" && grep "$archive" checksums.txt | shasum -a 256 --check --quiet)
+    if command -v shasum >/dev/null 2>&1; then
+        (cd "$tmpdir" && grep "$archive" checksums.txt | shasum -a 256 -c - >/dev/null 2>&1)
+    elif command -v sha256sum >/dev/null 2>&1; then
+        (cd "$tmpdir" && grep "$archive" checksums.txt | sha256sum -c - >/dev/null 2>&1)
     else
         echo "Error: no checksum tool found (need sha256sum or shasum)" >&2
         exit 1
