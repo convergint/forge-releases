@@ -1,10 +1,27 @@
-# Forge
+# Homebrew Forge
 
-A quality pipeline for AI-assisted development.
+Homebrew tap for [Forge](https://github.com/convergint/forge) — an AI-first quality pipeline for your repo.
 
-Binaries are available on the [releases page](https://github.com/convergint/forge-releases/releases).
+## Install
 
-**Supported platforms:** macOS and Linux · amd64 and arm64
+```bash
+brew tap convergint/forge
+brew install forge
+```
+
+## Upgrade
+
+```bash
+brew upgrade forge
+```
+
+## Windows
+
+Download the `.zip` for your architecture from the [latest release](https://github.com/convergint/homebrew-forge/releases) and add `forge.exe` to your PATH.
+
+## Documentation
+
+See [convergint/forge](https://github.com/convergint/forge) for full docs, configuration reference, and CLI usage.
 
 ```
 ███████╗ ██████╗ ██████╗  ██████╗ ███████╗
