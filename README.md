@@ -6,13 +6,13 @@ Homebrew tap for [Forge](https://github.com/convergint/forge) — an AI-first qu
 
 ```bash
 brew tap convergint/forge
-brew install forge
+brew install convergint/forge/forge
 ```
 
 ## Upgrade
 
 ```bash
-brew upgrade forge
+brew upgrade convergint/forge/forge
 ```
 
 ## Windows
