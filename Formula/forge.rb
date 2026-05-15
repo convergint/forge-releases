@@ -5,20 +5,20 @@
 class Forge < Formula
   desc "AI-first quality pipeline for your repo"
   homepage "https://github.com/convergint/forge"
-  version "0.6.0"
+  version "0.6.1"
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/convergint/homebrew-forge/releases/download/v0.6.0/forge_0.6.0_darwin_amd64.tar.gz"
-      sha256 "5597e1e3e905589460632a7f89c92c2c6411b468310fcb4741e59e4e6e9466b4"
+      url "https://github.com/convergint/homebrew-forge/releases/download/v0.6.1/forge_0.6.1_darwin_amd64.tar.gz"
+      sha256 "dfcf310e7a216b6e66e3204e26d56d0e71d2a9941339674c245b852b640b58cf"
 
       define_method(:install) do
         bin.install "forge"
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/convergint/homebrew-forge/releases/download/v0.6.0/forge_0.6.0_darwin_arm64.tar.gz"
-      sha256 "b5b95a3e1d754b80612d2be046f2245be5a8eb11cc832a1f387318ff873d905f"
+      url "https://github.com/convergint/homebrew-forge/releases/download/v0.6.1/forge_0.6.1_darwin_arm64.tar.gz"
+      sha256 "88b460539a63691a519c13ed191380be9c0f42ba9d4b76e6b8753604df16d961"
 
       define_method(:install) do
         bin.install "forge"
@@ -28,15 +28,15 @@ class Forge < Formula
 
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://github.com/convergint/homebrew-forge/releases/download/v0.6.0/forge_0.6.0_linux_amd64.tar.gz"
-      sha256 "7690d51326122d80b473d000ce929a495bde2ac8d46db0bdc22e1a54cbd49d09"
+      url "https://github.com/convergint/homebrew-forge/releases/download/v0.6.1/forge_0.6.1_linux_amd64.tar.gz"
+      sha256 "7a025dc89fc263b4c4048da76a390932469b6c84804a897b943676c691764c3c"
       define_method(:install) do
         bin.install "forge"
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/convergint/homebrew-forge/releases/download/v0.6.0/forge_0.6.0_linux_arm64.tar.gz"
-      sha256 "ffd80bfc54794dca50fba8ad7359b92b35255fd44456f21a76742da1a7aec71c"
+      url "https://github.com/convergint/homebrew-forge/releases/download/v0.6.1/forge_0.6.1_linux_arm64.tar.gz"
+      sha256 "01f14f2ea937642273f3ea77d5012288ffdde0e218abe207c22d3ac77bf7cd62"
       define_method(:install) do
         bin.install "forge"
       end
